@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { ListContainers } from '../models';
+import { ListContainers, StartContainer, StopContainer } from '../models';
 
 @Component({
   selector: 'app-list',
@@ -9,17 +9,50 @@ import { ListContainers } from '../models';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private _http: HttpService) { }
 
-  list: any
+  list: ListContainers[]
 
   ngOnInit() {
-    this.http.getContainerList().subscribe(x => {
-      console.log(x)
-      console.log(x[0].Id.substring(0, 12))
-      this.list = x
-      console.log(this.list)
-    })
+    this._http.getContainerList().subscribe(
+      data => {
+        this.list = data;
+        this.list.forEach(x => {
+          if (x.state == "running") {
+            x.toggle = true
+          } else {
+            x.toggle = false
+          }
+        })
+      },
+      err => console.log(err)
+    )
   }
 
+  onContainerStateChange(x: ListContainers) {
+    x.toggle = !x.toggle
+    console.log(this.list)
+    if (x.toggle) {
+      var startMsg = new StartContainer()
+      startMsg.id = x.id.substring(0, 12)
+      startMsg.checkpointId = ""
+      startMsg.checkpointDir = ""
+      this._http.startContainerByID(startMsg).subscribe(
+        data => {
+          console.log(data)
+        },
+        err => console.log(err)
+      )
+    } else {
+      var stopMsg = new StopContainer()
+      stopMsg.id = x.id.substring(0, 12)
+      stopMsg.duration = 0
+      this._http.stopContainerByID(stopMsg).subscribe(
+        data => {
+          console.log(data)
+        },
+        err => console.log(err)
+      )
+    }
+  }
 }

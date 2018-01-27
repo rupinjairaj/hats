@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ToggleComponent } from './toggle/toggle.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    ListComponent,
+    ToggleComponent
   ],
   imports: [
     BrowserModule,
