@@ -1,0 +1,18 @@
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>State</th>
+      <th>Toggle</th>      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of list">
+      <td>{{x.Id.substring(0, 12)}}</td>
+      <td>{{x.Image}}</td>
+      <td>{{x.State}}</td>
+      <td>{{true}}</td>
+    </tr>
+  </tbody>
+</table> 
