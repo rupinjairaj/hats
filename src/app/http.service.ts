@@ -20,8 +20,7 @@ export class HttpService {
   }
 
   public startContainerByID(msg: StartContainer) {
-    console.log(Constants.BaseUrl + Constants.StartContainer)
-    return this._httpClient.post(
+    return this._httpClient.post<ResponseMessage>(
       Constants.BaseUrl + Constants.StartContainer,
       JSON.stringify(msg),
       {
@@ -31,7 +30,6 @@ export class HttpService {
   }
 
   public stopContainerByID(msg: StopContainer) {  
-    console.log(Constants.BaseUrl + Constants.StopContainer)  
     return this._httpClient.post(
       Constants.BaseUrl + Constants.StopContainer,
       JSON.stringify(msg),

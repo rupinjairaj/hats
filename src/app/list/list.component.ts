@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../http.service';
 import { ListContainers, StartContainer, StopContainer } from '../models';
 
@@ -14,6 +14,10 @@ export class ListComponent implements OnInit {
   list: ListContainers[]
 
   ngOnInit() {
+    this.getContainerList()
+  }
+
+  getContainerList() {
     this._http.getContainerList().subscribe(
       data => {
         this.list = data;
@@ -31,7 +35,6 @@ export class ListComponent implements OnInit {
 
   onContainerStateChange(x: ListContainers) {
     x.toggle = !x.toggle
-    console.log(this.list)
     if (x.toggle) {
       var startMsg = new StartContainer()
       startMsg.id = x.id.substring(0, 12)
@@ -39,7 +42,7 @@ export class ListComponent implements OnInit {
       startMsg.checkpointDir = ""
       this._http.startContainerByID(startMsg).subscribe(
         data => {
-          console.log(data)
+          this.getContainerList()
         },
         err => console.log(err)
       )
@@ -49,7 +52,7 @@ export class ListComponent implements OnInit {
       stopMsg.duration = 0
       this._http.stopContainerByID(stopMsg).subscribe(
         data => {
-          console.log(data)
+          this.getContainerList()
         },
         err => console.log(err)
       )
