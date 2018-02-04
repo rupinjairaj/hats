@@ -1,23 +1,43 @@
 export class ListContainers {
-    public static ID: string = ''
-    public static Names: string[]
-    public static Image: string
-    public static ImageID: string
-    public static Command: string
-    public static Created: number
-    public static Ports: Port[]
-    public static SizeRw: number
-    public static SizeRootFs: number
-    // public static Labels     map[string]string
-    public static State: string
-    public static Status: string
-    //     public static HostConfig struct {
-    //     NetworkMode string`json:",omitempty"`
-    // }
-    // NetworkSettings * SummaryNetworkSettings
-    // Mounts
+    id: string
+    names: string[]
+    image: string
+    imageId: string
+    command: string
+    ports: Port[]
+    state: string
+    status: string
+    toggle: boolean
 }
 
 export class Port {
-
+    ip: string
+    privatePort: number
+    publicPort: number
+    type: string
 }
+
+export class StartContainer {
+    id: string
+    checkpointId: string
+    checkpointDir: string
+}
+
+export class StopContainer {
+    id: string
+    duration: 0
+}
+
+export class ResponseMessage {
+    source: string
+    isSuccess: string
+    message: string
+}
+// export class ContainerStates {
+//     created: boolean = false
+//     restarting: boolean = false
+//     running: boolean = true
+//     paused: boolean = false
+//     exited: boolean = false
+//     dead: boolean = false
+// }
