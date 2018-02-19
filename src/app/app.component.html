@@ -1,1 +1,10 @@
-<app-list></app-list>
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <app-list [list]="producerList" (onContainerStateChangeEvent)="onContainerStateChange($event)"></app-list>
+        </div>
+        <div class="col-md-6">
+            <app-list [list]="consumerList" (onContainerStateChangeEvent)="onContainerStateChange($event)"></app-list>
+        </div>
+    </div>
+</div>

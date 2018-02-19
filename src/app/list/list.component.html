@@ -1,22 +1,22 @@
-<div class="container">
-  <table class="table table-hover ">
+<div class="table-responsive">
+  <table class="table table-condensed">
     <thead>
       <tr>
         <th>ID</th>
         <th>Image</th>
-        <th>Command</th>
-        <th>State</th>
-        <th>Status</th>
+        <!-- <th>Command</th> -->
+        <!-- <th>State</th> -->
+        <!-- <th>Status</th> -->
         <th>Toggle</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let x of list">
+      <tr *ngFor="let x of list" [class.success]="x.toggle" [class.danger]="!x.toggle">
         <td>{{x.id.substring(0, 12)}}</td>
         <td>{{x.image}}</td>
-        <td>{{x.command}}</td>
-        <td>{{x.state}}</td>
-        <td>{{x.status}}</td>
+        <!-- <td>{{x.command}}</td> -->
+        <!-- <td>{{x.state}}</td> -->
+        <!-- <td>{{x.status}}</td> -->
         <td>
           <app-toggle [parentToggleValue]="x.toggle" (change)="onContainerStateChange(x)"></app-toggle>
         </td>
